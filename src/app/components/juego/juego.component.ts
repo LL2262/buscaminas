@@ -11,13 +11,18 @@ export class JuegoComponent implements OnInit {
   public tablero: Celda[][]; // Tablero de celdas
   public tam: number; // Tamaño del tablero
   public estadoDeJuego: number; // 0 Jugando; 1 Game Over; 2 Victoria
-  public minas: number;
+  public minas: number; // Cantidad de minas
+  public celdasVistas: number; // Celdas descubiertas
+  public celdasTotales: number; // Celdas totales
 
   constructor() {
     this.tablero = [];
     this.tam = 8;
     this.estadoDeJuego = 0;
     this.minas = 10;
+    this.celdasVistas = 0
+    this.celdasTotales = 8 * 8 - 10; // A las celdas totales se les resta las minas ya que si completa las celdas sin tocar minas gana
+
   }
 
   ngOnInit() {
@@ -76,6 +81,7 @@ export class JuegoComponent implements OnInit {
   }
 
 
+  // Metodo para mostrar minas o probabilidades
   onLeftClick(fila, columna) {
     if (this.estadoDeJuego == 0) { // Verifico que se esta jugando
       this.tablero[fila][columna].bandera = false; // Si hago click donde hay bandera, debo sacarla
@@ -85,7 +91,28 @@ export class JuegoComponent implements OnInit {
           this.estadoDeJuego = 1; // Pongo al juego en Game Over
           console.log('Game Over')
         } else {
-          //this.clicCasilla(fila, columna); Si no es una mina debo mostrar probabilidades
+          this.clickCelda(fila, columna); // Si no es una mina debo mostrar probabilidades
+        }
+      }
+    }
+  }
+
+
+  // Metodo para mostrar probabilidades y celdas adyacentes
+  clickCelda(fila, columna) {
+    if (!this.tablero[fila][columna].descubierta) { // Verifico que la celda NO este descubierta
+      this.tablero[fila][columna].descubierta = true; // Descubro la celda
+      this.celdasVistas++; // Incremento las celdas vistas sin minas
+      if (this.celdasVistas == this.celdasTotales) { // Verifica si se visualizaron todas las celdas sin minas
+        this.estadoDeJuego = 2; // Pongo al juego en Victoria
+        console.log('Victoria');
+      } else {
+        if (this.tablero[fila][columna].probabilidad == 0) { // Verifica si no hay minas adyacentes
+          for (var fila2 = this.max(0, fila - 1); fila2 < this.min(this.tam, fila + 2); fila2++) { // Recorre las celdas cercanas y tambien las ejecuta
+            for (var columna2 = this.max(0, columna - 1); columna2 < this.min(this.tam, columna + 2); columna2++) {
+              this.clickCelda(fila2, columna2);
+            }
+          }
         }
       }
     }
