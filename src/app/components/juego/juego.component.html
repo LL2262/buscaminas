@@ -2,7 +2,7 @@
   <div>
     <div class="d-flex justify-content-center">
       <div>
-        <button name="restart" class="btn btn-lg">
+        <button name="restart" class="btn btn-lg" (click)="restart()">
           <i *ngIf="estadoDeJuego == 0" class="far fa-smile" style="font-size: 36px"></i>
           <i *ngIf="estadoDeJuego == 1" class="far fa-frown" style="font-size: 36px"></i>
         </button>

@@ -118,4 +118,14 @@ export class JuegoComponent implements OnInit {
     }
   }
 
+
+  // Metodo que reinicia el juego
+  restart(){
+    this.estadoDeJuego = 0
+    this.tablero = [];
+    this.crearTablero();
+    this.colocarMinas();
+    this.celdasVistas = 0;
+  }
+
 }
