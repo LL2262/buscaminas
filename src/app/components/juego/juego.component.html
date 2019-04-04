@@ -25,7 +25,12 @@
                   <img class="mina" src="assets/img/mina.jpg">
                 </span>
 
-                <span style="font-size: 24px" *ngIf="!cell.esMina && cell.probabilidad > 0 && cell.descubierta">
+                <span style="font-size: 24px" *ngIf="!cell.esMina && cell.probabilidad > 0 && cell.descubierta"
+                    [ngClass]="{
+                      'text-primary':cell.probabilidad == 1,
+                      'text-success':cell.probabilidad == 2,
+                      'text-danger':cell.probabilidad == 3
+                    }">
                   {{cell.probabilidad}}
                 </span>
 
