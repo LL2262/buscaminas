@@ -14,10 +14,14 @@
           <tr *ngFor="let row of tablero; index as rowIndex;">
             <td class="celda" *ngFor="let cell of row; index as columnIndex;">
 
-              <div class="celda-content" (contextmenu)="onRightClick(rowIndex,columnIndex)">
+              <div class="celda-content" (contextmenu)="onRightClick(rowIndex,columnIndex)" (click)="onLeftClick(rowIndex,columnIndex)">
                 <span *ngIf="cell.bandera">
                   <img class="bandera" src="assets/img/bandera.jpg">
                 </span>
+
+                <span *ngIf="cell.esMina && cell.descubierta">
+                    <img class="mina" src="assets/img/mina.jpg">
+                  </span>
               </div>
 
             </td>

@@ -22,6 +22,7 @@ export class JuegoComponent implements OnInit {
 
   ngOnInit() {
     this.crearTablero();
+    this.colocarMinas();
   }
 
   // Metodo que inicializa las celdas del tablero
@@ -37,26 +38,23 @@ export class JuegoComponent implements OnInit {
   // Metodo utilizado para colocar las minas en el tablero
   colocarMinas() {
     for (var mina = 0; mina < this.minas; mina++) {
-
       var fila, columna;
-
       do {
         fila = Math.floor((Math.random() * 8)); // Numero aleatorio para las filas
         columna = Math.floor((Math.random() * 8)); // Numero aleatorio para las columnas
       } while (this.tablero[fila][columna].esMina == true); // Permite que solo se coloque una mina en la celda
-
       this.tablero[fila][columna].esMina = true; // Coloco mina
-
       // Agregamos a las celdas la cantidad de minas que hay a su alrrededor
       for (var fila2 = this.max(0, fila - 1); fila2 < this.min(this.tam, fila + 2); fila2++) {
         for (var columna2 = this.max(0, columna - 1); columna2 < this.min(this.tam, columna + 2); columna2++) {
-          if (this.tablero[fila2][columna2].esMina == false) { // Si la celda no es una bomba
+          if (this.tablero[fila2][columna2].esMina == false) { // Si la celda no es una mina...
             this.tablero[fila2][columna2].probabilidad++; // Incrementa el contador de minas
           }
         }
       }
     }
   }
+
 
   // Metodos utilizados para no pasarse de los bordes del tablero
   max(a, b) {
@@ -66,6 +64,7 @@ export class JuegoComponent implements OnInit {
     return Math.min(a, b);
   }
 
+
   // Metodo para agregar bandera
   onRightClick(fila, columna) {
     if (this.estadoDeJuego == 0) { // Verifico que se esta jugando
@@ -74,6 +73,22 @@ export class JuegoComponent implements OnInit {
       }
     }
     return false; // Evita desplegar el menu de opciones de pagina
+  }
+
+
+  onLeftClick(fila, columna) {
+    if (this.estadoDeJuego == 0) { // Verifico que se esta jugando
+      this.tablero[fila][columna].bandera = false; // Si hago click donde hay bandera, debo sacarla
+      if (!this.tablero[fila][columna].descubierta) { // Verifico que la celda NO este descubierta
+        if (this.tablero[fila][columna].esMina) { // Si es una mina..
+          this.tablero[fila][columna].descubierta = true; // Descubro la celda
+          this.estadoDeJuego = 1; // Pongo al juego en Game Over
+          console.log('Game Over')
+        } else {
+          //this.clicCasilla(fila, columna); Si no es una mina debo mostrar probabilidades
+        }
+      }
+    }
   }
 
 }

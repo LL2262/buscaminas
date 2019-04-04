@@ -21,7 +21,7 @@
     align-items: center;
 }
 
-.bandera{
+.bandera, .mina{
     width: 100%; 
     height: 100%;
 }
