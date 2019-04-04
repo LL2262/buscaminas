@@ -7,14 +7,14 @@
               <div class="row">
                 <div class="col form-group">
                   <label>Seleccione la dificultad</label>
-                  <select name="nivel" [(ngModel)]="nivel" class="form-control" required>
+                  <select name="nivel" #NombreCentro="ngModel" [(ngModel)]="nivel" class="form-control" required>
                       <option *ngFor="let i of niveles" [ngValue]="i" >{{i.dificultad}} {{i.filas}}x{{i.columnas}} Minas: {{i.minas}}</option>
                   </select>
                 </div>
               </div>
               <div class="row">
                 <div class="col text-center">
-                    <button type="submit" class="btn btn-primary">Comenzar</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="nivel.dificultad === ''">Comenzar >></button>
                 </div>
               </div>
             </form>
