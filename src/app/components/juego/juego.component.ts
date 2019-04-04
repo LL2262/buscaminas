@@ -21,5 +21,14 @@ export class JuegoComponent implements OnInit {
   ngOnInit() {
   }
 
+  // Metodo que inicializa las celdas del tablero
+  crearTablero() {
+    for (var fila: number = 0; fila < this.tam; fila++) {
+      this.tablero[fila] = [];
+      for (var columna: number = 0; columna < this.tam; columna++) {
+        this.tablero[fila][columna] = new Celda(false, false, false, 0);
+      }
+    }
+  }
 
 }
