@@ -1,18 +1,23 @@
 .table-hover-cells{
     background-color: gray;
   }
+
+.table-hover-cells>tbody>tr>td:hover {
+    background-color: #f5f5f5;
+    cursor: pointer;
+}
   
-  .celda{
-      width: 50px;
-      height: 50px;
-      text-align: center;
-      padding: 0 !important;
-  }
+.celda{
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    padding: 0 !important;
+}
   
-  .celda-content{
+.celda-content{
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+}
   
