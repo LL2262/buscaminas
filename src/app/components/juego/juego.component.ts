@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Celda } from 'src/app/modelos/celda';
 
 @Component({
   selector: 'app-juego',
@@ -7,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class JuegoComponent implements OnInit {
 
+  public tablero: Celda[][];
+  
   constructor() { }
 
   ngOnInit() {
