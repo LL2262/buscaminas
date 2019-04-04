@@ -1,3 +1,25 @@
-<p>
-  juego works!
-</p>
+<div class="d-flex justify-content-center">
+  <div>
+    <div class="d-flex justify-content-center">
+      <div>
+        <button name="restart" class="btn btn-lg">
+          <i *ngIf="estadoDeJuego == 0" class="far fa-smile" style="font-size: 36px"></i>
+          <i *ngIf="estadoDeJuego == 1" class="far fa-frown" style="font-size: 36px"></i>
+        </button>
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover-cells">
+        <tbody>
+          <tr *ngFor="let row of tablero; index as rowIndex;">
+            <td class="celda" *ngFor="let cell of row; index as columnIndex;">
+              <div class="celda-content">
+
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
