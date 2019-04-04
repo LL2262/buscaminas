@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Celda } from 'src/app/modelos/celda';
 import { CronometroComponent } from '../cronometro/cronometro.component';
+import { Nivel } from 'src/app/modelos/Nivel';
 
 @Component({
   selector: 'app-juego',
@@ -16,14 +17,15 @@ export class JuegoComponent implements OnInit {
   public celdasVistas: number; // Celdas descubiertas
   public celdasTotales: number; // Celdas totales
   @ViewChild(CronometroComponent) cronometro: CronometroComponent; // Instancia del componente Cronometro
+  public nivel: Nivel = JSON.parse(localStorage.getItem('dificultad'));
 
   constructor() {
     this.tablero = [];
-    this.tam = 8;
+    this.tam = this.nivel.filas;
     this.estadoDeJuego = 0;
-    this.minas = 10;
+    this.minas = this.nivel.minas;
     this.celdasVistas = 0
-    this.celdasTotales = 8 * 8 - 10; // A las celdas totales se les resta las minas ya que si completa las celdas sin tocar minas gana
+    this.celdasTotales = this.nivel.filas * this.nivel.columnas - this.nivel.minas; // A las celdas totales se les resta las minas ya que si completa las celdas sin tocar minas gana
 
 
   }
