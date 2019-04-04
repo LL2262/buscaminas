@@ -13,9 +13,13 @@
         <tbody>
           <tr *ngFor="let row of tablero; index as rowIndex;">
             <td class="celda" *ngFor="let cell of row; index as columnIndex;">
-              <div class="celda-content">
 
+              <div class="celda-content" (contextmenu)="onRightClick(rowIndex,columnIndex)">
+                <span *ngIf="cell.bandera">
+                  <img class="bandera" src="assets/img/bandera.jpg">
+                </span>
               </div>
+
             </td>
           </tr>
         </tbody>

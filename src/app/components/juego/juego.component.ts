@@ -66,4 +66,14 @@ export class JuegoComponent implements OnInit {
     return Math.min(a, b);
   }
 
+  // Metodo para agregar bandera
+  onRightClick(fila, columna) {
+    if (this.estadoDeJuego == 0) { // Verifico que se esta jugando
+      if (!this.tablero[fila][columna].descubierta) { // Verifico que la celda NO este descubierta
+        this.tablero[fila][columna].bandera = true; // Agrego bandera
+      }
+    }
+    return false; // Evita desplegar el menu de opciones de pagina
+  }
+
 }
