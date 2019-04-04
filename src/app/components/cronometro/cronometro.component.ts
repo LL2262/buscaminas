@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { Cronometro } from 'src/app/modelos/cronometro';
 
 @Component({
@@ -13,14 +13,17 @@ export class CronometroComponent implements OnInit {
 
   constructor() {
     this.cronometro = new Cronometro(0, 0, 0);
+    this.intervalo;
+
    }
 
   ngOnInit() {
     this.start();
   }
 
+  // Metodo que inicializa el cronometro
   start(){
-    this.intervalo = 0;
+    this.cronometro = new Cronometro(0, 0, 0);
     this.intervalo = setInterval(()=>{
       this.cronometro.segundos +=1;
       if(this.cronometro.segundos == 60){
@@ -35,6 +38,12 @@ export class CronometroComponent implements OnInit {
         }
       }
     }, 1000);
+  }
+
+  // Metodo que para el cronometro al ganar o perder el juego
+  stop(){
+    clearInterval(this.intervalo); 
+    this.intervalo = null;
   }
 
 }
