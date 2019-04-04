@@ -8,11 +8,18 @@ import { Celda } from 'src/app/modelos/celda';
 })
 export class JuegoComponent implements OnInit {
 
-  public tablero: Celda[][];
+  public tablero: Celda[][]; // Tablero de celdas
+  public tam: number; // Tamaño del tablero
+  public estadoDeJuego: number; // 0 Jugando; 1 Game Over; 2 Victoria
   
-  constructor() { }
+  constructor() {
+    this.tablero = [];
+    this.tam = 8;
+    this.estadoDeJuego = 0;
+   }
 
   ngOnInit() {
   }
+
 
 }
